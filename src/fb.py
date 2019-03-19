@@ -61,6 +61,23 @@ def log_user_in():
 
 
 def init():
+    CFG = None
+    def read_config_file():
+        global CFG
+        try:
+            cfgfile = open('../fbconfig.json', 'r')
+            CFG = json.loads(cfgfile.read())
+
+        except Exception:
+            print ('Damn! Something fishy\n Try re-installing facebook-cli')
+            exit(1)
+        
+        # finally:
+        #     print (CFG)
+        
+    read_config_file()
+    print (CFG)
+
     if not check_for_rc_file():
         # User is not logged into Facebook
         # Log him in first
@@ -70,4 +87,3 @@ def init():
 if __name__ == "__main__":
     init()
 
-    
